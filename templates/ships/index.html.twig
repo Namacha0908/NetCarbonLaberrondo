@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ShipsController!
+{% endblock %}
+
+{% block body %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
+
+	<div class="album py-5 bg-light">
+		<div class="container">
+			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+				{% for ship in data %}
+
+					<div class="col">
+						<div class="card shadow-sm">
+
+							<div class="card-body">
+								{% if ship.image %}
+
+									<img class="d-block mx-auto mb-4" src="{{ ship.image }}" alt="" width="250" height="250">
+								{% else %}
+									<img class="d-block mx-auto mb-4" src="../../img/logo.jpg" alt="" width="250" height="250">
+
+
+								{% endif %}
+								<h5 class="card-title">{{ ship.name }}</h5>
+
+
+								<h6 class="card-subtitle mb-2 text-muted">avoir</h6>
+
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="btn-group">
+										<a href="{{ path('app_ships_ship', {'id': ship.id }) }}" class="btn btn-secondary" role="button" aria-pressed="true">View more ...</a>
+
+
+									</div>
+									{% if ship.active  %}
+
+										<div class="">Activity :
+											<i class="fa-solid fa-ferry text-success"></i>
+
+
+										</div>
+
+									{% else %}
+										<div class="">Activity :
+											<i class="fa-solid fa-ferry text-danger"></i>
+
+
+										</div>
+
+									{% endif %}
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+
+				{% endfor %}
+
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,177 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CapsuleController!
+{% endblock %}
+
+{% block body %}
+	<style>
+
+	</style>
+
+	<div>
+		<div class="px-4 py-5 my-5 text-center">
+
+
+			<h3 class="display-5 fw-bold">{{ data.type }}
+			</h3>
+			<div class="col-lg-6 mx-auto">
+				<p class="lead mb-4">Serial number :
+					{{ data.serial }}</p>
+			</div>
+			<p>{{ data.last_update }}</p>
+
+
+			<div class="row pt-5">
+				<div class="col-xl-3 col-md-6 mb-4">
+					<div class="card border-left-primary shadow h-100 py-2">
+						<div class="card-body">
+							<div class="row no-gutters align-items-center">
+								<div class="col mr-2">
+									<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+										Water Landing(s)</div>
+									<div class="h5 mb-0 font-weight-bold text-gray-800">{{data.water_landings}}</div>
+								</div>
+								<div class="col-auto">
+									<i class="fa-solid fa-ship fa-2x text-gray-300"></i>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="col-xl-3 col-md-6 mb-4">
+					<div class="card border-left-success shadow h-100 py-2">
+						<div class="card-body">
+							<div class="row no-gutters align-items-center">
+								<div class="col mr-2">
+									<div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+										Land Landing(s)</div>
+									<div class="h5 mb-0 font-weight-bold text-gray-800">{{data.land_landings}}</div>
+								</div>
+								<div class="col-auto">
+									<i class="fa-solid fa-helicopter-symbol fa-2x text-gray-300"></i>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xl-3 col-md-6 mb-4">
+					<div class="card border-left-info shadow h-100 py-2">
+						<div class="card-body">
+							<div class="row no-gutters align-items-center">
+								<div class="col mr-2">
+									<div class="text-xs font-weight-bold text-info text-uppercase mb-1">Reuse Count
+									</div>
+
+
+									<div class="row no-gutters align-items-center">
+										<div class="col-auto">
+											<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{data.reuse_count}}</div>
+
+										</div>
+										<div class="col">
+											<div class="progress progress-sm mr-2">
+												<div class="progress-bar bg-info" role="progressbar" style="width: {{data.reuse_count}}%" aria-valuenow="{{data.reuse_count}}" aria-valuemin="0" aria-valuemax="10"></div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-auto">
+									<i class="fa-solid fa-recycle fa-2x text-gray-300"></i>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Pending Requests Card Example -->
+				<div class="col-xl-3 col-md-6 mb-4">
+					<div class="card border-left-warning shadow h-100 py-2">
+						<div class="card-body">
+							<div class="row no-gutters align-items-center">
+								<div class="col mr-2">
+									<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+										Status</div>
+									{% if data.status == "active" %}
+										<div class="h5 mb-0 font-weight-bold text-gray-800">
+
+											<i class="fa-solid fa-shuttle-space text-success"></i>
+
+
+										</div>
+									{% elseif data.status == "retired" %}
+
+										<div class="h5 mb-0 font-weight-bold text-gray-800">
+											<i class="fa-solid fa-shuttle-space text-danger"></i>
+
+
+										</div>
+									{% else %}
+										<div class="h5 mb-0 font-weight-bold text-gray-800">
+											<i class="fa-solid fa-burst text-warning"></i>
+
+
+										</div>
+
+
+									{% endif %}
+								</div>
+								<div class="col-auto">
+									<i class="fas fa-comments fa-2x text-gray-300"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<h3>Launches of the Capsule</h3>
+			<div class="album py-5 bg-light">
+				<div class="container grid">
+
+					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+						{% set i = 1 %}
+
+						{% for launch in data.launches %}
+
+
+							<div class="col" data-category="">
+
+
+								<div class="card shadow-sm">
+
+									<div class="card-body">
+										<h5 class="card-title">Vol
+											{{i}}
+										</h5>
+										{% set i = i + 1 %}
+
+
+										<p class="card-text"></p>
+
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="btn-group">
+												<a href="{{ path('app_launch', {'id': launch }) }}" class="btn btn-secondary" role="button" aria-pressed="true">View more ...</a>
+											</div>
+
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+{% endblock %}

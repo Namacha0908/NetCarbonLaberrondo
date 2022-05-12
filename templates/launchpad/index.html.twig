@@ -1,0 +1,183 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LaunchpadController!
+{% endblock %}
+
+{% block body %}
+		<style>
+
+		#map {
+			height: 400px;
+			/* The height is 400 pixels */
+			width: 400px;
+			/* The width is the width of the web page */
+		}
+	</style>
+	<div>
+		<div class="px-4 py-5 my-5 text-center">
+
+
+			<h3 class="display-5 fw-bold">{{data.full_name}}</h3>
+			<p class="lead mb-4">{{data.locality}}
+				in
+				{{data.region}}
+			</p>
+			
+			
+			</p>
+			<div
+				class="col-lg-6 mx-auto mb-4">
+				<!--The div element for the map -->
+				<div id="map"></div>
+				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoWceP073qOJI_7CQG7OdM7CHgt2SoO3g&callback=initMap" defer></script>
+			</div>
+
+			<div class="row pt-5">
+
+
+				<!-- Earnings (Monthly) Card Example -->
+				<div class="col-xl-3 col-md-6 mb-4">
+					<div class="card border-left-primary shadow h-100 py-2">
+						<div class="card-body">
+							<div class="row no-gutters align-items-center">
+								<div class="col mr-2">
+									<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+										Timezone</div>
+									<div class="h5 mb-0 font-weight-bold text-gray-800">{{data.timezone}}</div>
+								</div>
+								<div class="col-auto">
+									<i class="fa-solid fa-clock fa-2x text-gray-300"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<div class="col-xl-3 col-md-6 mb-4">
+					<div class="card border-left-success shadow h-100 py-2">
+						<div class="card-body">
+							<div class="row no-gutters align-items-center">
+								<div class="col mr-2">
+									<div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+										Success</div>
+
+									<div class="h5 mb-0 font-weight-bold text-gray-800">
+									<p>{{data.launch_successes}}/{{data.launch_attempts}}</p>
+									</div>
+								</div>
+								<div class="col-auto">
+									<i class="fa-solid fa-medal fa-2x text-gray-300"></i>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				
+
+
+				<!-- Pending Requests Card Example -->
+				<div class="col-xl-3 col-md-6 mb-4">
+					<div class="card border-left-warning shadow h-100 py-2">
+						<div class="card-body">
+							<div class="row no-gutters align-items-center">
+								<div class="col mr-2">
+									<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+										Status</div>
+									{% if data.status == "active" %}
+										<div class="h5 mb-0 font-weight-bold text-gray-800">
+
+											<i class="fa-solid fa-user-astronaut text-success"></i>
+
+
+										</div>
+									{% else %}
+
+										<div class="h5 mb-0 font-weight-bold text-gray-800">
+											<i class="fa-solid fa-user-astronaut text-danger"></i>
+
+
+										</div>
+
+									{% endif %}
+								</div>
+								<div class="col-auto">
+									<i class="fa-solid fa-helicopter-symbol fa-2x text-gray-300"></i>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<h3>Launches at {{data.name}}</h3>
+			{# {% for launch in data.launches %}
+																																																																																																																					<a href="{{ path('app_launch', {'id': launch }) }}" class="btn btn-secondary" role="button" aria-pressed="true">View more ...</a>
+																																																																																																																
+																																																																																																																
+																																																																																																																				{% endfor %} #}
+			<div class="album py-5 bg-light">
+				<div class="container grid">
+
+					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+						{% set i = 1 %}
+
+						{% for launch in data.launches %}
+
+
+							<div class="col" data-category="">
+
+
+								<div class="card shadow-sm">
+
+									<div class="card-body">
+										<h5 class="card-title">Vol
+											{{i}}
+										</h5>
+										{% set i = i + 1 %}
+
+
+										<p class="card-text"></p>
+
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="btn-group">
+												<a href="{{ path('app_launch', {'id': launch }) }}" class="btn btn-secondary" role="button" aria-pressed="true">View more ...</a>
+											</div>
+
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+	<script>
+		// Initialize and add the map
+		function initMap() { // The location of localisation
+		const localisation = {
+		lat: {{ data.latitude }},
+		lng: {{ data.longitude }}
+
+		};
+		// The map, centered at localisation
+		const map = new google.maps.Map(document.getElementById("map"), {
+		zoom: 10,
+		center: localisation
+		});
+		// The marker, positioned at localisation
+		const marker = new google.maps.Marker({position: localisation, map: map});
+		}
+
+		window.initMap = initMap;
+	</script>
+{% endblock %}

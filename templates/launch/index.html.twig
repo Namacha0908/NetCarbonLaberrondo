@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LaunchController!
+{% endblock %}
+
+{% block body %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
+	
+	<div>
+
+		<div class="px-4 py-5 my-5 text-center">
+			{% if data.links.patch.small %}
+				<img class="d-block mx-auto mb-4" src="{{ data.links.patch.small }}" alt="" width="250" height="250">
+			{% else %}
+				<img class="d-block mx-auto mb-4" src="../../img/placeholder.png" alt="" width="250" height="250">
+			{% endif %}
+
+			<h3 class="display-5 fw-bold">{{ data.name }}
+			</h3>
+
+
+			<div class="col-lg-6 mx-auto">
+				<p class="lead mb-4">Launch number :
+					{{ data.flight_number }}</p>
+
+
+				<h6>
+					{{ data.date_local }}</h6>
+
+				<p>{{ data.details }}</p>
+
+				{% if data.links.webcast %}
+
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/{{ data.links.youtube_id }}" title="YouTube video player" frameborder="0" allow="" allowfullscreen></iframe>
+
+
+				{% endif %}
+
+			</div>
+		</div>
+
+	{% endblock %}

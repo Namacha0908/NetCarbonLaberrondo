@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LandpadsController!
+{% endblock %}
+
+{% block body %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
+
+	<div class="album py-5 bg-light">
+		<div class="container">
+			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+				{% for landpad in data %}
+
+					<div class="col">
+						<div class="card shadow-sm">
+
+							<div class="card-body">
+								<h5 class="card-title">{{ landpad.full_name }}</h5>
+
+
+								<h6 class="card-subtitle mb-2 text-muted">Locality :
+									{{ landpad.locality }}</h6>
+
+
+								<p class="card-text">{{ landpad.details }}</p>
+
+
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="btn-group">
+										<a href="{{ path('app_landpad', {'id': landpad.id }) }}" class="btn btn-secondary" role="button" aria-pressed="true">View more ...</a>
+									</div>
+
+									{% if landpad.status == "active" %}
+
+										<div class="">Activity :
+
+											<i class="fa-solid fa-shuttle-space text-success"></i>
+
+
+										</div>
+
+									{% else %}
+										<div class="">Activity :
+											<i class="fa-solid fa-shuttle-space text-danger"></i>
+
+
+										</div>
+
+									{% endif %}
+
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,191 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ShipController!
+{% endblock %}
+
+{% block body %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
+
+		<div>
+		<div class="px-4 py-5 my-5 text-center">
+
+			<img class="d-block mx-auto mb-4" src="{{ data.image }}" alt="" width="250" height="250">
+
+			<h3 class="display-5 fw-bold">{{ data.name }}
+			</h3>
+			<p>Type : {{data.type}}</p>
+			<p>{{data.mass_kg}} kg</p>
+
+			<div
+				class="row pt-5">
+
+
+				<!-- Earnings (Monthly) Card Example -->
+				<div class="col-xl-3 col-md-6 mb-4">
+					<div class="card border-left-primary shadow h-100 py-2">
+						<div class="card-body">
+							<div class="row no-gutters align-items-center">
+								<div class="col mr-2">
+									<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+										Home Port</div>
+									<div class="h5 mb-0 font-weight-bold text-gray-800">{{data.home_port}}</div>
+								</div>
+								<div class="col-auto">
+									<i class="fa-solid fa-building-columns fa-2x text-gray-300"></i>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Earnings (Monthly) Card Example -->
+				<div class="col-xl-3 col-md-6 mb-4">
+					<div class="card border-left-success shadow h-100 py-2">
+						<div class="card-body">
+							<div class="row no-gutters align-items-center">
+								<div class="col mr-2">
+									<div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+										Launch(es) to his credit</div>
+
+									<div class="h5 mb-0 font-weight-bold text-gray-800">
+										{% set i = 0 %}
+
+										{% for launch in data.launches %}
+											{% set i = i + 1 %}
+
+										{% endfor %}
+										{{i}}
+									</div>
+								</div>
+								<div class="col-auto">
+									<i class="fa-solid fa-shuttle-space fa-2x text-gray-300"></i>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xl-3 col-md-6 mb-4">
+					<div class="card border-left-success shadow h-100 py-2">
+						<div class="card-body">
+							<div class="row no-gutters align-items-center">
+								<div class="col mr-2">
+									<div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+										Know more ?!</div>
+
+									<div class="h5 mb-0 font-weight-bold text-gray-800">
+										<a href="{{ data.link }}" class="btn btn-secondary" role="button" aria-pressed="true">Visit Marine Traffic ...</a>
+
+
+									</div>
+								</div>
+								<div class="col-auto">
+									<i class="fa-solid fa-book-open fa-2x text-gray-300"></i>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- Pending Requests Card Example -->
+				<div class="col-xl-3 col-md-6 mb-4">
+					<div class="card border-left-warning shadow h-100 py-2">
+						<div class="card-body">
+							<div class="row no-gutters align-items-center">
+								<div class="col mr-2">
+									<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+										Status</div>
+									{% if data.status == "active" %}
+										<div class="h5 mb-0 font-weight-bold text-gray-800">
+
+											<i class="fa-solid fa-user-astronaut text-success"></i>
+
+
+										</div>
+									{% else %}
+
+										<div class="h5 mb-0 font-weight-bold text-gray-800">
+											<i class="fa-solid fa-user-astronaut text-danger"></i>
+
+
+										</div>
+
+									{% endif %}
+								</div>
+								<div class="col-auto">
+									<i class="fa-solid fa-atom fa-2x text-gray-300"></i>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<h3>Launches of
+				{{data.name}}</h3>
+			{# {% for launch in data.launches %}
+																																																																																																																					<a href="{{ path('app_launch', {'id': launch }) }}" class="btn btn-secondary" role="button" aria-pressed="true">View more ...</a>
+																																																																																																																
+																																																																																																																
+																																																																																																																				{% endfor %} #}
+			<div class="album py-5 bg-light">
+				<div class="container grid">
+
+					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+						{% set i = 1 %}
+
+						{% for launch in data.launches %}
+
+
+							<div class="col" data-category="">
+
+
+								<div class="card shadow-sm">
+
+									<div class="card-body">
+										<h5 class="card-title">Vol
+											{{i}}
+										</h5>
+										{% set i = i + 1 %}
+
+
+										<p class="card-text"></p>
+
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="btn-group">
+												<a href="{{ path('app_launch', {'id': launch }) }}" class="btn btn-secondary" role="button" aria-pressed="true">View more ...</a>
+											</div>
+
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	{% endblock %}

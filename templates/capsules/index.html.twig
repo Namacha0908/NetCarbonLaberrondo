@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CapsulesController!
+{% endblock %}
+
+{% block body %}
+	<style>
+
+	</style>
+
+	<div class="album py-5 bg-light">
+		<div class="container">
+			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+				{% for capsule in data %}
+
+					<div class="col">
+						<div class="card shadow-sm">
+
+							<div class="card-body">
+								<h5 class="card-title">{{ capsule.type }}</h5>
+
+
+								<h6 class="card-subtitle mb-2 text-muted">Serial :
+									{{ capsule.serial }}</h6>
+
+
+								<p class="card-text">{{ capsule.last_update }}</p>
+
+
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="btn-group">
+										<a href="{{ path('app_capsule', {'id': capsule.id }) }}" class="btn btn-secondary" role="button" aria-pressed="true">View more ...</a>
+
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
